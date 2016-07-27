@@ -64,6 +64,7 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
 
     private OnQueryTextListener mOnQueryChangeListener;
     private SearchViewListener mSearchViewListener;
+    private OnBackButtonClickListener mOnBackButtonClickListener;
 
     private ListAdapter mAdapter;
 
@@ -216,7 +217,7 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
 
         public void onClick(View v) {
             if (v == mBackBtn) {
-                closeSearch();
+                onBackBtnClicked();
             } else if (v == mVoiceBtn) {
                 onVoiceClicked();
             } else if (v == mEmptyBtn) {
@@ -557,6 +558,14 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
         }
     }
 
+    public void onBackBtnClicked() {
+        if (mOnBackButtonClickListener != null) {
+            mOnBackButtonClickListener.onBackButtonClick();
+        } else {
+            closeSearch();
+        }
+    }
+
     /**
      * Close search view.
      */
@@ -593,6 +602,10 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
      */
     public void setOnSearchViewListener(SearchViewListener listener) {
         mSearchViewListener = listener;
+    }
+
+    public void setOnBackButtonClickListener(OnBackButtonClickListener listener) {
+        mOnBackButtonClickListener = listener;
     }
 
     /**
@@ -724,5 +737,7 @@ public class MaterialSearchView extends FrameLayout implements Filter.FilterList
         void onSearchViewClosed();
     }
 
-
+    public interface OnBackButtonClickListener {
+        void onBackButtonClick();
+    }
 }

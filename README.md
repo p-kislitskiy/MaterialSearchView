@@ -13,11 +13,20 @@ Maybe it would be useful to take a look into the new official approach
 http://www.materialdoc.com/search-filter/
 
 # Usage
-**Add the dependencies to your gradle file:**
-```javascript
-	dependencies {
-    	compile 'com.miguelcatalan:materialsearchview:1.4.0'
-	}
+Make library module and copy the aar file (e.g. material-search-view.aar) into your project libs folder.
+**Add the following dependency into gradle.**
+```gradle
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile(name:'material-search-view', ext:'aar')
+}
 ```
 **Add MaterialSearchView to your layout file along with the Toolbar** *(Add this block at the bottom of your layout, in order to display it over the rest of the view)*:
 
@@ -239,10 +248,6 @@ It is a little bit tricky but can be achieved using this:
         }
     }
 ```
-# Help me
-Pull requests are more than welcome, help me and others improve this awesome library.
-
-The code is based in the Krishnakapil original concept.
 
 # License
 	Copyright 2015 Miguel Catalan Bañuls
